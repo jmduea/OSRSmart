@@ -238,5 +238,7 @@ Overall, OSRSmart offers a convenient and efficient way for OSRS players to keep
               item.save()
               
 # Front-End Development:
-
-# Skills Acquired:
+- Home Dashboard:
+<br>![alt text](https://github.com/jmduea/OSRSmart/blob/main/Homepage.jpg "OSRSmart Dashboard")
+- Search Functionality:
+<br>![alt_text](https://github.com/jmduea/OSRSmart/blob/main/SearchFunction.gif "Search Functionality")
