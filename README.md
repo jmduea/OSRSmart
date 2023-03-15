@@ -120,7 +120,7 @@ Overall, OSRSmart offers a convenient and efficient way for OSRS players to keep
               return render(request, "OSRSmart/confirm_delete_modal.html", content)
               
 - CRUD functionality in action:              
-![alt text](https://github.com/jmduea/OSRSmart/blob/main/CrudFunctionality.gif "CRUD functionality")
+![alt text](https://github.com/jmduea/OSRSmart/blob/main/CRUDFunctionality.gif "CRUD functionality")
 # Web Scraping:
 - Scraping Grand Exchange Market Index Info and displaying it on the homepage:
 
