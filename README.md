@@ -12,7 +12,7 @@ The website's homepage is designed to provide users with quick access to their f
 Overall, OSRSmart offers a convenient and efficient way for OSRS players to keep track of their favorite items and stay informed about the latest market trends.
 
 # CRUD Functionality:
-- Creating an item and saving it to the database
+- Creating an item and saving it to the database:
 
       # View function to create a new item in the database
       def create_item(request):
@@ -27,7 +27,7 @@ Overall, OSRSmart offers a convenient and efficient way for OSRS players to keep
                   # filled out
            return render(request, 'OSRSmart/OSRSmart_create.html', {'form': form})
 
-- Displaying all items in the database on a catalogue page with filter options
+- Displaying all items in the database on a catalogue page with filter options:
     
       def display_catalogue(request):
         item_list = Item.objects.all()
@@ -123,7 +123,7 @@ Overall, OSRSmart offers a convenient and efficient way for OSRS players to keep
 ![alt text](https://github.com/jmduea/OSRSmart/blob/main/CRUDFunctionality.gif "CRUD functionality")
 # Web Scraping:
 - Scraping Grand Exchange Market Index Info and displaying it on the homepage:
-
+![alt text](https://github.com/jmduea/OSRSmart/blob/main/GrandExchangeIndexes.jpg "Grand Exchange Indexes")
 
       # View function to render the home page
       def osrsmart_home(request):
@@ -163,8 +163,8 @@ Overall, OSRSmart offers a convenient and efficient way for OSRS players to keep
           content = {'items': items, 'cards_data': cards_data, 'favorite_items': favorite_items}
           return render(request, 'OSRSmart/OSRSmart_home.html', content)
           
- - Scraping Item specific info from it's wiki page
-
+ - Scraping Item specific info from it's wiki page:
+<br>![alt text](https://github.com/jmduea/OSRSmart/blob/main/WikiScrapedInfo.jpg "Wiki Scraped Info")
           
         def scrape_item_info(item_name):
             url = f"https://oldschool.runescape.wiki/w/{item_name.replace(' ', '_')}"
@@ -193,46 +193,50 @@ Overall, OSRSmart offers a convenient and efficient way for OSRS players to keep
             return data
 
 # API:
-    # The function below updates the prices of items on the website.
-    def update_prices(item_id):
-        item = get_object_or_404(Item, id=item_id)
+- Current price, as well as trend data for 30 days, 90 days, and 180 days is obtained from the OSRS API and displayed in the details page for the item:
+<br>![alt text](https://github.com/jmduea/OSRSmart/blob/main/API.jpg "API Info")
 
-        # Attempts to retrieve data from cache. If not found, makes a request to the external API.
-        cache_key = f"item_{item.id}_data"
-        data = cache.get(cache_key)
-        if data is None:
-            url = f"https://services.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item={item.id}"
-            headers = {
-                'User-Agent': '@UnknwnEntity#2059'
-                }
+          # The function below updates the prices of items on the website.
+          def update_prices(item_id):
+              item = get_object_or_404(Item, id=item_id)
 
-            try:
-                response = requests.get(url, headers=headers)
-                response.raise_for_status()
-                data = response.json()
-                # If successful, caches the response data with a timeout of 2 hours.
-                cache.set(cache_key, data, timeout=7200)
-                print(response.status_code)
-            # If there is an error, it returns an error message.
-            except:
-                raise ValueError('Error updating item price.')
+              # Attempts to retrieve data from cache. If not found, makes a request to the external API.
+              cache_key = f"item_{item.id}_data"
+              data = cache.get(cache_key)
+              if data is None:
+                  url = f"https://services.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item={item.id}"
+                  headers = {
+                      'User-Agent': '@UnknwnEntity#2059'
+                      }
 
-        # Updates the item's attributes with the new data and saves it to the database.
-        item.icon = data['item']['icon']
-        item.icon_large = data['item']['icon_large']
-        item.type = data['item']['type']
-        item.type_icon = data['item']['typeIcon']
-        item.current_price = data['item']['current']['price']
-        item.current_trend = data['item']['current']['trend']
-        item.today_price = data['item']['today']['price']
-        item.today_trend = data['item']['today']['trend']
-        item.day30_change = data['item']['day30']['change']
-        item.day30_trend = data['item']['day30']['trend']
-        item.day90_change = data['item']['day90']['change']
-        item.day90_trend = data['item']['day90']['trend']
-        item.day180_change = data['item']['day180']['change']
-        item.day180_trend = data['item']['day180']['trend']
-        item.save()
+                  try:
+                      response = requests.get(url, headers=headers)
+                      response.raise_for_status()
+                      data = response.json()
+                      # If successful, caches the response data with a timeout of 2 hours.
+                      cache.set(cache_key, data, timeout=7200)
+                      print(response.status_code)
+                  # If there is an error, it returns an error message.
+                  except:
+                      raise ValueError('Error updating item price.')
+
+              # Updates the item's attributes with the new data and saves it to the database.
+              item.icon = data['item']['icon']
+              item.icon_large = data['item']['icon_large']
+              item.type = data['item']['type']
+              item.type_icon = data['item']['typeIcon']
+              item.current_price = data['item']['current']['price']
+              item.current_trend = data['item']['current']['trend']
+              item.today_price = data['item']['today']['price']
+              item.today_trend = data['item']['today']['trend']
+              item.day30_change = data['item']['day30']['change']
+              item.day30_trend = data['item']['day30']['trend']
+              item.day90_change = data['item']['day90']['change']
+              item.day90_trend = data['item']['day90']['trend']
+              item.day180_change = data['item']['day180']['change']
+              item.day180_trend = data['item']['day180']['trend']
+              item.save()
+              
 # Front-End Development:
 
 # Skills Acquired:
