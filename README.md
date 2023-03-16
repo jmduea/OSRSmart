@@ -1,3 +1,6 @@
+
+<p align="center"><img src="https://github.com/jmduea/OSRSmart/blob/main/OSRSmart.jpeg"/></p>
+
 # Introduction:
 
 During my time at The Tech Academy, I collaborated with a team of peers to develop an interactive website for managing one's collections of things related to various hobbies, as well as API and Data Scraped content for those hobbies and was built using the Django framework. We worked with a legacy codebase, which provided a valuable learning experience in bug fixing, code cleanup, and implementing requested features. Despite encountering some major changes, we managed to deliver the required product on time by using our available resources effectively. This project gave me insight into how skilled developers utilize available resources to create a high-quality product. As part of the team, I contributed to several back-end stories, of which I am particularly proud. However, since much of the site had already been developed, there were also numerous front-end stories and UX enhancements that required varying levels of effort. Each team member had the opportunity to work on front-end and back-end stories. During the two-week sprint, I also developed additional skills in project management and team programming, which I am confident will be useful in future projects.
